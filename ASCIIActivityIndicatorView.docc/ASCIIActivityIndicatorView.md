@@ -40,4 +40,4 @@ activityIndicatorView.startAnimating()
 
 ### View
 
-- ``ASCIIActivityIndicatorView/ASCIIActivityIndicatorView-swift.class``
+- ``ASCIIActivityIndicatorView/ASCIIActivityIndicatorView``
