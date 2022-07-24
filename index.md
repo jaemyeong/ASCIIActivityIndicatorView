@@ -2,6 +2,8 @@
 
 ASCIIActivityIndicatorView 스위프트 패키지 입니다.
 
+![Preview](assets/images/preview.gif)
+
 ## Requirements
 
 - macOS 12.5
@@ -13,7 +15,7 @@ ASCIIActivityIndicatorView 스위프트 패키지 입니다.
 ### Swift Package Manager
 
 ```swift
-.package(url: "https://github.com/jaemyeong/ASCIIActivityIndicatorView.git", .upToNextMajor(from: "0.1.0"))
+.package(url: "https://github.com/jaemyeong/ASCIIActivityIndicatorView.git", .upToNextMajor(from: "0.1.1"))
 ```
 
 ## Usage
