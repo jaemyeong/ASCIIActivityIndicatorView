@@ -135,7 +135,6 @@ extension ASCIIActivityIndicatorView {
         textLabel.font = font
         textLabel.textColor = .openColor.gray.gray8.color
         textLabel.text = self.values.first
-        textLabel.isHidden = true
     }
     
     private func configureViewHierarchy() {
