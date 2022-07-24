@@ -6,6 +6,7 @@ import OpenColorKit
 
 import ErrorKit
 
+/// 작업이 진행 중임을 문자로 보여주는 뷰.
 public final class ASCIIActivityIndicatorView: UIView {
     private let textLabel: UILabel
     
@@ -27,7 +28,7 @@ public final class ASCIIActivityIndicatorView: UIView {
         }
     }
     
-    // 현재 애니메이션 상태.
+    /// 현재 애니메이션 상태.
     public var isAnimating: Bool {
         self.animating != nil
     }
