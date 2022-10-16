@@ -2,23 +2,25 @@
 
 ASCIIActivityIndicatorView 스위프트 패키지 입니다.
 
-![Preview](assets/images/preview.gif)
+## Overview
 
-## Requirements
+![Preview](https://github.com/jaemyeong/ASCIIActivityIndicatorView/blob/20970aa4ad18a90cdfccde13761d10f5625d04e0/assets/images/preview.gif)
 
-- macOS 12.5
-- Xcode 13.4.1
-- iOS 13.0
+### Requirements
 
-## Installation
+- macOS 12.6
+- Xcode 14.0.1
+- Swift 5.7
 
-### Swift Package Manager
+### Installation
+
+#### Swift Package Manager
 
 ```swift
-.package(url: "https://github.com/jaemyeong/ASCIIActivityIndicatorView.git", .upToNextMajor(from: "0.1.1"))
+.package(url: "https://github.com/jaemyeong/ASCIIActivityIndicatorView.git", .upToNextMajor(from: "0.1.2"))
 ```
 
-## Usage
+### Usage
 
 ```swift
 import ASCIIActivityIndicatorView
@@ -27,14 +29,14 @@ let activityIndicatorView = ASCIIActivityIndicatorView()
 activityIndicatorView.startAnimating()
 ```
 
-## Documentation
+### Documentation
 
 - [ASCIIActivityIndicatorView](https://ascii-activity-indicator-view.jaemyeong.com/docs/documentation/asciiactivityindicatorview/)
 
-## License
+### License
 
 - MIT
 
-## Author
+### Author
 
 [Jaemyeong Jin](https://github.com/jaemyeong) ([jaemyeong@me.com](mailto:jaemyeong@me.com))
