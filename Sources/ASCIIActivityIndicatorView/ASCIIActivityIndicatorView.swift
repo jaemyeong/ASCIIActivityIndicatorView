@@ -1,36 +1,37 @@
-import UIKit
-
 import Pretendard
-
 import OpenColorKit
-
 import ErrorKit
 
-/// 작업이 진행 중임을 문자로 보여주는 뷰.
+#if canImport(UIKit)
+
+import UIKit
+
 public final class ASCIIActivityIndicatorView: UIView {
+    
     private let textLabel: UILabel
     
     private let values: [String]
     
-    private var animating: Task<Void, Never>? {
+    private var animationTask: Task<Void, Never>? {
         willSet {
-            self.animating?.cancel()
+            guard let animationTask = self.animationTask else {
+                return
+            }
+            animationTask.cancel()
         }
         didSet {
-            self.setVisibility()
+            self.updateVisibility()
         }
     }
     
-    /// 애니메이션이 정지되었을 때 뷰를 숨기거나 보여줍니다.
     public var hidesWhenStopped: Bool {
         didSet {
-            self.setVisibility()
+            self.updateVisibility()
         }
     }
     
-    /// 현재 애니메이션 상태.
     public var isAnimating: Bool {
-        self.animating != nil
+        self.animationTask != nil
     }
     
     public init(values: String...) {
@@ -38,23 +39,7 @@ public final class ASCIIActivityIndicatorView: UIView {
         self.values = values.isEmpty ? ["⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏", "⠋", "⠙"] : values
         self.hidesWhenStopped = true
         
-        let font: UIFont
-        do {
-            font = try .pretendardFont(ofSize: 60.0, weight: .regular) ?? .systemFont(ofSize: 60.0, weight: .regular)
-        } catch {
-            fatalError(String(describing: error))
-        }
-        
-        super.init(
-            frame: CGRect(
-                origin: .zero,
-                size: values.first?.size(
-                    withAttributes: [
-                        .font: font,
-                    ]
-                ) ?? .zero
-            )
-        )
+        super.init(frame: .zero)
         
         self.configureView()
         self.configureTextLabel()
@@ -66,66 +51,67 @@ public final class ASCIIActivityIndicatorView: UIView {
         fatalError(String(describing: InstantiateError()))
     }
     
-    deinit {
-        self.animating = nil
-    }
-}
-
-extension ASCIIActivityIndicatorView {
-    /// ActivityIndicatorView 애니메이션을 시작합니다.
     public func startAnimating() {
-        self.animating = Task {
-            let stream = AsyncStream<Int> { continuation in
-                let handle = Task.detached {
-                    var offset = 0
+        let numberOfValues = self.values.count
+        
+        let indexStream = AsyncStream<Int> { continuation in
+            let generator = Task {
+                var offset = 0
+                
+                while true {
+                    try Task.checkCancellation()
                     
-                    while true {
-                        try Task.checkCancellation()
-                        
-                        try await Task.sleep(nanoseconds: 1_000_000_000 / 8)
-                        
-                        if offset < self.values.count - 1 {
-                            offset += 1
-                        } else {
-                            offset = 0
-                        }
-                        
-                        continuation.yield(offset)
+                    try await Task.sleep(nanoseconds: 125_000_000)
+                    
+                    if offset < numberOfValues - 1 {
+                        offset += 1
+                    } else {
+                        offset = 0
                     }
-                }
-                continuation.onTermination = { termination in
-                    guard case .cancelled = termination else {
-                        return
-                    }
-                    handle.cancel()
+                    
+                    continuation.yield(offset)
                 }
             }
             
-            for await value in stream {
-                self.textLabel.text = self.values[value]
+            continuation.onTermination = { termination in
+                guard case .cancelled = termination else {
+                    return
+                }
+                generator.cancel()
+            }
+        }
+        
+        self.animationTask = Task { [weak self] in
+            for await index in indexStream {
+                guard let self = self else {
+                    return
+                }
+                self.textLabel.text = self.values[index]
             }
         }
     }
     
-    /// ActivityIndicatorView 애니메이션을 정지합니다.
     public func stopAnimating() {
-        self.animating = nil
+        self.animationTask = nil
     }
 }
 
 extension ASCIIActivityIndicatorView {
-    private func setVisibility() {
+    
+    private func updateVisibility() {
         self.isHidden = self.hidesWhenStopped ? !self.isAnimating : false
     }
 }
 
 extension ASCIIActivityIndicatorView {
+    
     private func configureView() {
         self.backgroundColor = .openColor.gray.gray0.color
     }
     
     private func configureTextLabel() {
         let font: UIFont
+        
         do {
             font = try .pretendardFont(ofSize: 60.0, weight: .regular) ?? .systemFont(ofSize: 60.0, weight: .regular)
         } catch {
@@ -144,7 +130,9 @@ extension ASCIIActivityIndicatorView {
     
     private func configureLayoutConstraints() {
         let textLabel = self.textLabel
+        
         textLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         self.addConstraints([
             textLabel.topAnchor.constraint(equalTo: self.topAnchor),
             textLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -153,3 +141,5 @@ extension ASCIIActivityIndicatorView {
         ])
     }
 }
+
+#endif
