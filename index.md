@@ -4,7 +4,7 @@ ASCIIActivityIndicatorView 스위프트 패키지 입니다.
 
 ## Overview
 
-![Preview](https://github.com/jaemyeong/ASCIIActivityIndicatorView/blob/20970aa4ad18a90cdfccde13761d10f5625d04e0/assets/images/preview.gif)
+![](https://raw.githubusercontent.com/jaemyeong/ASCIIActivityIndicatorView/gh-pages/assets/images/preview.gif)
 
 ### Requirements
 
