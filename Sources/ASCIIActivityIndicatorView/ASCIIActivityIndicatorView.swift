@@ -1,10 +1,9 @@
+#if canImport(UIKit) && canImport(Pretendard) && canImport(OpenColorKit) && canImport(ErrorKit)
+
+import UIKit
 import Pretendard
 import OpenColorKit
 import ErrorKit
-
-#if canImport(UIKit)
-
-import UIKit
 
 public final class ASCIIActivityIndicatorView: UIView {
     
@@ -107,6 +106,8 @@ extension ASCIIActivityIndicatorView {
     
     private func configureView() {
         self.backgroundColor = .openColor.gray.gray0.color
+        
+        self.updateVisibility()
     }
     
     private func configureTextLabel() {

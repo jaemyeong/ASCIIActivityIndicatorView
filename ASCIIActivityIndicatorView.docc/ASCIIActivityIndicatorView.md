@@ -17,7 +17,7 @@ ASCIIActivityIndicatorView 스위프트 패키지 입니다.
 #### Swift Package Manager
 
 ```swift
-.package(url: "https://github.com/jaemyeong/ASCIIActivityIndicatorView.git", .upToNextMajor(from: "0.1.2"))
+.package(url: "https://github.com/jaemyeong/ASCIIActivityIndicatorView.git", .upToNextMajor(from: "0.1.3"))
 ```
 
 ### Usage
