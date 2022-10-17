@@ -1,10 +1,10 @@
-# ASCIIActivityIndicatorView
+# ``ASCIIActivityIndicatorView``
 
 ASCIIActivityIndicatorView 스위프트 패키지 입니다.
 
 ## Overview
 
-![Preview](https://github.com/jaemyeong/ASCIIActivityIndicatorView/blob/20970aa4ad18a90cdfccde13761d10f5625d04e0/assets/images/preview.gif)
+![](https://raw.githubusercontent.com/jaemyeong/ASCIIActivityIndicatorView/gh-pages/assets/images/preview.gif)
 
 ### Requirements
 
@@ -17,7 +17,7 @@ ASCIIActivityIndicatorView 스위프트 패키지 입니다.
 #### Swift Package Manager
 
 ```swift
-.package(url: "https://github.com/jaemyeong/ASCIIActivityIndicatorView.git", .upToNextMajor(from: "0.1.2"))
+.package(url: "https://github.com/jaemyeong/ASCIIActivityIndicatorView.git", .upToNextMajor(from: "0.1.3"))
 ```
 
 ### Usage
