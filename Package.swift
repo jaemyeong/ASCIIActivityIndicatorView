@@ -39,3 +39,9 @@ let package = Package(
         ),
     ]
 )
+
+#if swift(>=5.6)
+
+package.dependencies.append(.package(url: "https://github.com/apple/swift-docc-plugin", .upToNextMajor(from: "1.0.0")))
+
+#endif
